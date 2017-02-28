@@ -16,12 +16,15 @@ import com.microsoft.windowsazure.mobileservices.*;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.TableJsonQueryCallback;
+import com.microsoft.windowsazure.mobileservices.table.query.Query;
+import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,8 +85,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-
-                results = mResponseTable.where().execute().get();
+                results = mResponseTable.orderBy("Date",QueryOrder.Descending).top(20).execute().get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -98,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             if (results != null) {
                 mAdapter.clear();
-                Collections.reverse(results);
                 for (Response item : results) {
                     mAdapter.add(item);
                 }
