@@ -11,7 +11,16 @@ import android.widget.TextView;
 
 import com.example.robbi.khmeradmin.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import models.Response;
+
+import static android.R.attr.id;
+import static android.view.View.Z;
 
 /**
  * Created by robbi on 2/14/2017.
@@ -39,9 +48,34 @@ public class ResponseAdapter extends ArrayAdapter<Response> {
         final TextView UserIdTextView = (TextView) row.findViewById(R.id.UserIdText);
         UserIdTextView.setText(currentItem.getUserId());
 
+        Date date = stringToDate(currentItem.getDate());
+
         final TextView DateTextView = (TextView) row.findViewById(R.id.dateTextView);
-        DateTextView.setText(currentItem.getDate().toString());
+        DateFormat dateFormat = new SimpleDateFormat("EEE, MMM dd");
+        DateTextView.setText(dateFormat.format(date));
+
+        final TextView TimeTextView = (TextView) row.findViewById(R.id.timeTextView);
+        DateFormat timeFormat = new SimpleDateFormat("hh:mm:ss a");
+        TimeTextView.setText(timeFormat.format(date));
 
         return row;
+    }
+
+    private Date stringToDate(String stringDate){
+        //ex. 2017-02-28T01:50:52.363Z
+
+        // Format for input
+        String dateTime = stringDate.replace("T", " ").replace("Z", "");
+
+        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+        Date date = null;
+        try {
+            date = dateParser.parse(dateTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return date;
     }
 }

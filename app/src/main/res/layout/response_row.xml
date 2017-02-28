@@ -9,8 +9,14 @@
         android:layout_height="wrap_content"
         android:text="ID"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="100sp"
         android:layout_height="wrap_content"
         android:id="@+id/dateTextView"
         android:text="date"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeTextView"
+        android:text="10:30 pm"/>
 </LinearLayout>
