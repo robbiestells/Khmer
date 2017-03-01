@@ -1,41 +1,22 @@
-package com.example.robbi.khmeradmin;
+package com.prime.perspective.khmeradmin;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ListView;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.microsoft.windowsazure.mobileservices.*;
-import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
-import com.microsoft.windowsazure.mobileservices.table.TableJsonQueryCallback;
-import com.microsoft.windowsazure.mobileservices.table.query.Query;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import Adapters.ResponseAdapter;
 import models.Response;
-
-import static android.view.View.GONE;
 
 public class MainActivity extends AppCompatActivity {
     MobileServiceClient mClient;
