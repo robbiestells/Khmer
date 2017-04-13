@@ -13,11 +13,13 @@ import android.widget.ListView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.microsoft.windowsazure.mobileservices.*;
+import com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.TableJsonQueryCallback;
 import com.microsoft.windowsazure.mobileservices.table.query.Query;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
+import com.squareup.okhttp.OkHttpClient;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -54,6 +56,20 @@ public class MainActivity extends AppCompatActivity {
                     "http://khmer.azurewebsites.net/",
                     this);
 
+            final OkHttpClientFactory client = new OkHttpClientFactory() {
+                @Override
+                public OkHttpClient createOkHttpClient() {
+                   long timeout = 3000;
+                    TimeUnit unit = TimeUnit.MILLISECONDS;
+                    OkHttpClient okHttpClient = new OkHttpClient();
+                    okHttpClient.setConnectTimeout(timeout, unit);
+                    okHttpClient.setReadTimeout(timeout, unit);
+                    okHttpClient.setWriteTimeout(timeout, unit);
+                    return okHttpClient;
+                }
+            };
+
+            mClient.setAndroidHttpClientFactory(client);
 
             mResponseTable = mClient.getTable(Response.class);
 
