@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,11 +8,29 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.prime.perspective.khmeradmin.MainActivity">
+
+    <TextView
+        android:id="@+id/noneFoundText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No input found, hit refresh to try again."
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/refreshButton"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/responseList"
         tools:listitem="@layout/response_row"></ListView>
-</RelativeLayout>
+</LinearLayout>

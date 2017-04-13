@@ -1,4 +1,4 @@
-package com.example.robbi.khmeradmin;
+package com.prime.perspective.khmeradmin;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -19,6 +21,7 @@ import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.TableJsonQueryCallback;
 import com.microsoft.windowsazure.mobileservices.table.query.Query;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
+import com.prime.perspective.khmeradmin.R;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.io.IOException;
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     MobileServiceTable<Response> mResponseTable;
     ResponseAdapter mAdapter;
     Context context;
+    TextView noneFoundText;
+    Button refreshButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
 
+        noneFoundText = (TextView) findViewById(R.id.noneFoundText);
+        refreshButton = (Button) findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                noneFoundText.setVisibility(View.GONE);
+                getData();
+            }
+        });
+
+        getData();
+
+    }
+    private void getData(){
         try {
             mClient = new MobileServiceClient(
                     "http://khmer.azurewebsites.net/",
@@ -59,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             final OkHttpClientFactory client = new OkHttpClientFactory() {
                 @Override
                 public OkHttpClient createOkHttpClient() {
-                   long timeout = 3000;
+                    long timeout = 3000;
                     TimeUnit unit = TimeUnit.MILLISECONDS;
                     OkHttpClient okHttpClient = new OkHttpClient();
                     okHttpClient.setConnectTimeout(timeout, unit);
@@ -79,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
             responseListView.setAdapter(mAdapter);
 
 
-             ResponseAsync async = new ResponseAsync();
-              async.execute();
+            ResponseAsync async = new ResponseAsync();
+            async.execute();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -119,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
                 for (Response item : results) {
                     mAdapter.add(item);
                 }
+            } else {
+                noneFoundText.setVisibility(View.VISIBLE);
             }
             progressDialog.dismiss();
         }
