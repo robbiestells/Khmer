@@ -1,4 +1,4 @@
-package com.example.robbi.khmeradmin;
+package com.prime.perspective.khmeradmin;
 
 import org.junit.Test;
 

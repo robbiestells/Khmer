@@ -1,4 +1,4 @@
-package com.example.robbi.khmeradmin;
+package com.prime.perspective.khmeradmin;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

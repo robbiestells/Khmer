@@ -6,21 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.example.robbi.khmeradmin.R;
+import com.prime.perspective.khmeradmin.R;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 import models.Response;
-
-import static android.R.attr.id;
-import static android.view.View.Z;
 
 /**
  * Created by robbi on 2/14/2017.
